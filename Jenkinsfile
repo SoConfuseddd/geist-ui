@@ -1,5 +1,8 @@
 pipeline { 
     agent any
+    environment {
+        PATH = "/usr/local/bin:$PATH" // Make sure to use the correct path to Yarn
+    }
  
     triggers {
         githubPush() // Triggers the pipeline on a push event
