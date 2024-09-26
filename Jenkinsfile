@@ -52,36 +52,36 @@ pipeline {
                 sh 'echo "Running tests..."'
             }
         }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('', "${env.DOCKER_CREDENTIALS_ID}") {
-                        docker.image("${env.DOCKER_IMAGE_NAME}").push()
-                    }
-                }
-            }
-        }
-        // stage('Login to Docker Hub') {
+        // stage('Push Docker Image') {
         //     steps {
         //         script {
-        //             // Login to Docker Hub
-        //             withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-        //                 sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
+        //             docker.withRegistry('', "${env.DOCKER_CREDENTIALS_ID}") {
+        //                 docker.image("${env.DOCKER_IMAGE_NAME}").push()
         //             }
         //         }
         //     }
         // }
-        // stage('Push Docker Images') {
-        //     steps {
-        //         script {
-        //             // Push the latest image
-        //             sh "docker push ${DOCKER_IMAGE_NAME}:latest"
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
+                    }
+                }
+            }
+        }
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    // Push the latest image
+                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
 
-        //             // Push the current build image
-        //             sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
-        //         }
-        //     }
-        // }
+                    // Push the current build image
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
+                }
+            }
+        }
     }
     post {
         always {
