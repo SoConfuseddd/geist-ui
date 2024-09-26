@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH = "/usr/local/node-v18.6.0/bin/:/usr/bin/docker:$PATH" // Make sure to use the correct path to Yarn & Docker
     }
- 
+  
     triggers {
         githubPush() // Triggers the pipeline on a push event
         DOCKER_CREDENTIALS_ID = 'DockerHub' // Jenkins credentials ID for Docker Hub
