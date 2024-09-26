@@ -6,6 +6,8 @@ pipeline {
  
     triggers {
         githubPush() // Triggers the pipeline on a push event
+        DOCKER_CREDENTIALS_ID = 'DockerHub' // Jenkins credentials ID for Docker Hub
+        DOCKER_IMAGE_NAME = 'reactuilibrarytask/geist-ui'
     }
 
     stages {
@@ -30,7 +32,15 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build .'
+                sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ."
+            }
+        }
+        stage('Tag Images') {
+            steps {
+                script {
+                    // Tag the current image as 'latest'
+                    sh "docker tag ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ${DOCKER_IMAGE_NAME}:latest"
+                }
             }
         }
 
@@ -39,6 +49,33 @@ pipeline {
                 // Add test steps
                 sh 'echo "Running tests..."'
             }
+        }
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
+                    }
+                }
+            }
+        }
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    // Push the latest image
+                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
+
+                    // Push the current build image
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Cleanup: Optionally, remove the built Docker image and tags
+            sh "docker rmi -f ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ${DOCKER_IMAGE_NAME}:latest"
         }
     }
 }
