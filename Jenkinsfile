@@ -6,6 +6,12 @@ pipeline {
     }
 
     stages {
+        stage('Log Environment') {
+            steps {
+                sh 'echo $PATH' // Log the PATH environment variable
+                sh 'yarn --version' // Check if yarn is available
+            }
+        }
         stage('Clone Repository') {
             steps {
                 checkout scm // This checks out the latest changes from the repository
