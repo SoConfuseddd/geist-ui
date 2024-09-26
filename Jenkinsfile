@@ -1,7 +1,7 @@
 pipeline {  
     agent any
     environment {
-        PATH = "/usr/local/node-v18.6.0/bin/:$PATH" // Make sure to use the correct path to Yarn
+        PATH = "/usr/local/node-v18.6.0/bin/:/usr/bin/docker:$PATH" // Make sure to use the correct path to Yarn & Docker
     }
  
     triggers {
@@ -21,10 +21,15 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Installing Dependencies') {
             steps {
                 // Add your build steps here, e.g.:
                 sh 'echo "Building the project..."'
+                sh 'yarn'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
                 sh 'yarn'
             }
         }
@@ -37,29 +42,3 @@ pipeline {
         }
     }
 }
-
-
-
-// pipeline {
-//     agent any
-
-//     stages {
-//         stage('Build') {
-//             steps {
-//                 sh 'echo "Building the project..."'
-//             }
-//         }
-
-//         stage('Test') {
-//             steps {
-//                 sh 'echo "Running tests..."'
-//             }
-//         }
-
-//         stage('Deploy') {
-//             steps {
-//                 sh 'echo "Deploying the project..."'
-//             }
-//         }
-//     }
-// }
