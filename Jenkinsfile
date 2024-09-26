@@ -1,4 +1,4 @@
-pipeline { 
+pipeline {  
     agent any
     environment {
         PATH = "/usr/local/bin:$PATH" // Make sure to use the correct path to Yarn
