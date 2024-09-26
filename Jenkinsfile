@@ -5,10 +5,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'DockerHub' // Jenkins credentials ID for Docker Hub
         DOCKER_IMAGE_NAME = 'reactuilibrarytask/geist-ui'
     }
-    options {
-        // Enables the ability to restart from any failed stage
-        stage('failed') { }
-    }
+
   
     triggers {
         githubPush() // Triggers the pipeline on a push event
