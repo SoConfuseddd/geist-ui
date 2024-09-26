@@ -16,7 +16,7 @@ pipeline {
             steps {
                 // Add your build steps here, e.g.:
                 sh 'echo "Building the project..."'
-                sh 'yarn'
+                sh '/usr/local/node-v18.6.0/bin/yarn yarn'
             }
         }
 
