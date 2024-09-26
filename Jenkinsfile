@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'yarn'
+                sh 'docker build .'
             }
         }
 
