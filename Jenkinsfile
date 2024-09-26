@@ -1,7 +1,7 @@
 pipeline {  
     agent any
     environment {
-        PATH = "/usr/local/bin:$PATH" // Make sure to use the correct path to Yarn
+        PATH = "/usr/local/node-v18.6.0/bin/:$PATH" // Make sure to use the correct path to Yarn
     }
  
     triggers {
