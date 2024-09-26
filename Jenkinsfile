@@ -74,11 +74,12 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
+                    
+                    // Push the current build image
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
                     // Push the latest image
                     sh "docker push ${DOCKER_IMAGE_NAME}:latest"
 
-                    // Push the current build image
-                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
                 }
             }
         }
