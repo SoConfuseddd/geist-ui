@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Geist-UI
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Geist-UI
+  template:
+    metadata:
+      labels:
+        app: Geist-UI
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 3000

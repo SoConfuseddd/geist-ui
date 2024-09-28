@@ -1,0 +1,11 @@
+---
+- name: Validate Kops cluster on remote host and display output
+  hosts: KOPS
+  tasks:
+    - name: Run kops validate cluster command
+      command: "kops validate cluster --state=s3://nadahefnawy-geistui-bucket"
+      register: command_output  # Register the output to capture it
+
+    - name: Show the output of kops validate cluster
+      debug:
+        var: command_output.stdout  # Display the standard output

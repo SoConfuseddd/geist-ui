@@ -1,0 +1,17 @@
+---
+- name: Install Helm and prometheus on Kops Machine
+  hosts: KOPS
+  tasks:
+    - name: Copy files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: '0755'  # Make it executable if needed
+      loop:
+        - { src: 'helm.sh', dest: '/tmp/helm.sh' }
+        - { src: 'prometheus.sh', dest: '/tmp/prometheus.sh' }
+    - name: Run multiple scripts on the remote host
+      shell: "{{ item }}"
+      loop:
+        - /tmp/helm.sh
+        - /tmp/prometheus.sh
