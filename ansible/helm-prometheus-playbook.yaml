@@ -8,10 +8,12 @@
         dest: "{{ item.dest }}"
         mode: '0755'  # Make it executable if needed
       loop:
-        - { src: 'helm.sh', dest: '/tmp/helm.sh' }
-        - { src: 'prometheus.sh', dest: '/tmp/prometheus.sh' }
+        - { src: '../bashScripts/helm.sh', dest: '/tmp/helm.sh' }
+        - { src: '../bashScripts/prometheus.sh', dest: '/tmp/prometheus.sh' }
+        - { src: '../bashScripts/javaForKopsAsSlave.sh', dest: '/tmp/javaForKopsAsSlave.sh' }
     - name: Run multiple scripts on the remote host
       shell: "{{ item }}"
       loop:
         - /tmp/helm.sh
         - /tmp/prometheus.sh
+        - /tmp/javaForKopsAsSlave.sh

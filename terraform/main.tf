@@ -63,7 +63,8 @@ resource "aws_iam_instance_profile" "kops_instance_profile" {
 resource "aws_instance" "kops" {
   ami           = "ami-0e86e20dae9224db8"  
   instance_type = "t2.micro"
-  key_name      = "keypair1"            
+  key_name      = "keypair1"  
+  security_groups = ["kops"]  
 
   iam_instance_profile = aws_iam_instance_profile.kops_instance_profile.name  
   tags = {

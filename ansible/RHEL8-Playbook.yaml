@@ -1,0 +1,19 @@
+---
+- name: Configure Jenkins Server
+  hosts: Jenkins-Server
+  tasks:
+    - name: Copy files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: '0755'  
+      loop:
+        - { src: '../bashScripts/node18.6.0.sh', dest: '/tmp/node18.6.0.sh' }
+        - { src: '../bashScripts/jenkins.sh', dest: '/tmp/jenkins.sh' }
+        - { src: '../bashScripts/docker.sh', dest: '/tmp/docker.sh' }
+
+    - name: Run multiple scripts on the remote host
+      shell: "{{ item }}"
+      loop:
+        - /tmp/node18.6.0.sh
+        - /tmp/jenkins.sh
