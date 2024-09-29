@@ -4,7 +4,7 @@ metadata:
   name: Geist-UI
 spec:
   selector:
-    app: Geist-UI
+    app: geist-ui
   ports:
     - protocol: TCP
       port: 80
