@@ -1,4 +1,5 @@
 ---
+# javaForKopsAsSlave.sh to make the required directories and install dependencies that kops need to run as a slave for jenkins
 - name: Configure Kops Machine
   hosts: Jenkins-Server
   tasks:
