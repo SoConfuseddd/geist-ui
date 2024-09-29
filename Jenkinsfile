@@ -27,7 +27,7 @@ pipeline {
                 sh 'yarn'
             }
         }
-        stage('Checking Code Style') {
+        stage('Checking Code Style') { 
             steps {
                 sh 'echo "Linting the project code..."'
                 sh 'yarn lint'
