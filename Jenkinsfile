@@ -5,7 +5,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'DockerHub'
         DOCKER_IMAGE_NAME = 'reactuilibrarytask/geist-ui'  
     }
-
+ 
     triggers {
         githubPush()
     }
