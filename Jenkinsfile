@@ -42,17 +42,10 @@ pipeline {
             }
         }
 
-        stage('Confirm Directory') {
-            steps {
-                sh 'pwd' // Confirm the working directory
-                sh 'ls -R' // List files to ensure test files are present
-            }
-        }
-
         stage('Testing') {
             steps {
                 sh 'echo "Updating and Running Test Cases..."'
-                sh 'yarn test:update' // Run Jest directly
+                sh 'yarn test' // Run Jest directly
             }
         }
 
