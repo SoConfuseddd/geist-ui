@@ -36,7 +36,7 @@ pipeline {
         stage('Testing') {
             steps {
                 sh 'echo "Updating and Running Test Cases..."'
-                sh 'yarn test:update' 
+                sh 'yarn test:update --no-cache' 
             }
         }
         stage('Build Docker Image') {
