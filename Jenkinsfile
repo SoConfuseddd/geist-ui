@@ -37,8 +37,11 @@ pipeline {
         }
         stage('printenv') {
             steps {
-                sh 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                sh 'echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"'
                 sh 'printenv'
+                sh 'pwd'
+                sh 'node -v'
+                sh 'yarn -v'
             }
         }
 
