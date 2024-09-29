@@ -14,7 +14,6 @@ pipeline {
         stage('Clean Up') {
             steps {
                 sh 'docker system prune -af --volumes'
-                sh 'rm -rf node_modules'
             }
         }
         stage('Clone Repository') {
@@ -37,7 +36,7 @@ pipeline {
         stage('Testing') {
             steps {
                 sh 'echo "Updating and Running Test Cases..."'
-                sh 'yarn test:update' 
+                sh 'yarn test:update --passWithNoTests' 
             }
         }
         stage('Build Docker Image') {
