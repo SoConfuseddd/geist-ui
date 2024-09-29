@@ -4,7 +4,7 @@ sudo mkdir /opt/jenkins-slave
 
 sudo apt update
 
-sudo apt install openjdk-11-jdk
+sudo apt install openjdk-11-jdk -y
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
