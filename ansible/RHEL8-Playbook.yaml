@@ -1,4 +1,8 @@
 ---
+#This playbook copies 3 scripts
+# node18.6.0.sh to install node version 18.6.0 and yarn
+# jenkins.sh to install Jenkins and its dependencies
+# docker.sh to install docker and add the jenkins user to the docker group in order to be able to run docker commands from the jenkins pipeline
 - name: Configure Jenkins Server
   hosts: Jenkins-Server
   tasks:
@@ -6,14 +10,14 @@
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
-        mode: '0755'  
+        mode: '0755'  # Make it executable if needed
       loop:
         - { src: '../bashScripts/node18.6.0.sh', dest: '/tmp/node18.6.0.sh' }
         - { src: '../bashScripts/jenkins.sh', dest: '/tmp/jenkins.sh' }
         - { src: '../bashScripts/docker.sh', dest: '/tmp/docker.sh' }
-
     - name: Run multiple scripts on the remote host
       shell: "{{ item }}"
       loop:
         - /tmp/node18.6.0.sh
         - /tmp/jenkins.sh
+        - /tmp/docker.sh
