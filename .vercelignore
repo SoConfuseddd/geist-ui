@@ -1,6 +1,6 @@
 .hg
 .git
-.gitmodules 
+.gitmodules
 .svn
 .cache
 .next
