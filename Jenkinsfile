@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'reactuilibrarytask/geist-ui'
     }
 
-  
+   
     triggers {
         githubPush() // Triggers the pipeline on a push event
 
