@@ -72,7 +72,7 @@ pipeline {
         stage('Kubernetes Deploy') {
             agent { label 'KOPS' }
             steps {
-                sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest"
+                sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest" 
             }
         }
     }
