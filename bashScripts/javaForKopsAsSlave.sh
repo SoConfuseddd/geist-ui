@@ -2,7 +2,15 @@
 
 sudo mkdir /opt/jenkins-slave
 
-sudo apt install openjdk-8-jdk -y
+sudo apt update
 
-sudo chown ubuntu.ubuntu /opt/jenkins-slave -R
+sudo apt install openjdk-11-jdk
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+export PATH=$JAVA_HOME/bin:$PATH
+
+source ~/.bashrc
+
+sudo chown ubuntu:ubuntu /opt/jenkins-slave -R
 
