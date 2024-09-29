@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Geist-UI
+  name: geist-ui
 spec:
   replicas: 1
   selector:
