@@ -8,10 +8,10 @@
         dest: "{{ item.dest }}"
         mode: '0755'  # Make it executable if needed
       loop:
-        - { src: 'awscli.sh', dest: '/tmp/awscli.sh' }
-        - { src: 'kubectl.sh', dest: '/tmp/kubectl.sh' }
-        - { src: 'kops.sh', dest: '/tmp/kops.sh' }
-        - { src: 'setupK8sClusterKops.sh', dest: '/tmp/setupK8sClusterKops.sh' }
+        - { src: '../bashScripts/awscli.sh', dest: '/tmp/awscli.sh' }
+        - { src: '../bashScripts/kubectl.sh', dest: '/tmp/kubectl.sh' }
+        - { src: '../bashScripts/kops.sh', dest: '/tmp/kops.sh' }
+        - { src: '../bashScripts/setupK8sClusterKops.sh', dest: '/tmp/setupK8sClusterKops.sh' }
     - name: Run multiple scripts on the remote host
       shell: "{{ item }}"
       loop:
