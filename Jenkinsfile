@@ -1,4 +1,4 @@
-pipeline {   
+pipeline {    
     agent any
     environment {
         PATH = "/usr/local/node-v18.6.0/bin/:/usr/bin/docker:$PATH"
