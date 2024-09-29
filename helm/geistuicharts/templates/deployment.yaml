@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Geist-UI
+      app: geist-ui
   template:
     metadata:
       labels:
-        app: Geist-UI
+        app: geist-ui
     spec:
       containers:
         - name: {{ .Chart.Name }}
