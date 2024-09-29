@@ -1,4 +1,9 @@
 ---
+# this playbook will copy 4 scripts to the kops instance then run them
+# awscli.sh to install aws-cli in order to let kops instance create resources in aws
+# kubectl.sh download and install kubectl binaries
+# kops.sh download and install kops binaries
+# setupK8sClusterKops.sh setup the kubernetes cluster using kops
 - name: Configure Kops Machine
   hosts: Jenkins-Server
   tasks:
