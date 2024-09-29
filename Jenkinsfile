@@ -22,6 +22,7 @@ pipeline {
                 sh 'docker system prune -af --volumes'
             }
         }
+        
         stage('Clone Repository') {
             steps {
                 checkout scm
@@ -32,6 +33,12 @@ pipeline {
             steps {
                 sh 'echo "Building the project..."'
                 sh 'yarn'
+            }
+        }
+        stage('printenv') {
+            steps {
+                sh 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                sh 'printenv'
             }
         }
 
