@@ -11,54 +11,34 @@ pipeline {
     }
 
     stages {
-        stage('Log Environment') {
-            steps {
-                sh 'echo $PATH'
-                sh 'yarn --version'
-            }
-        }
         stage('Clean Up') {
             steps {
                 sh 'docker system prune -af --volumes'
             }
         }
-        
         stage('Clone Repository') {
             steps {
                 checkout scm
             }
         }
-
         stage('Installing Dependencies') {
             steps {
                 sh 'echo "Building the project..."'
                 sh 'yarn'
             }
         }
-        stage('printenv') {
-            steps {
-                sh 'echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"'
-                sh 'printenv'
-                sh 'pwd'
-                sh 'node -v'
-                sh 'yarn -v'
-            }
-        }
-
         stage('Checking Code Style') {
             steps {
                 sh 'echo "Linting the project code..."'
                 sh 'yarn lint'
             }
         }
-
         stage('Testing') {
             steps {
                 sh 'echo "Updating and Running Test Cases..."'
                 sh 'yarn test:update' 
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ."
@@ -71,7 +51,6 @@ pipeline {
                 }
             }
         }
-
         stage('Login to Docker Hub') {
             steps {
                 script {
@@ -90,14 +69,13 @@ pipeline {
                 }
             }
         }
-
-        stage('Kubernetes Deploy') {
-            agent { label 'KOPS' }
-            steps {
-                sh "kubectl get namespace prod || kubectl create namespace prod"
-                sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest --namespace prod"
-            }
-        }
+        // stage('Kubernetes Deploy') {
+        //     agent { label 'KOPS' }
+        //     steps {
+        //         sh "kubectl get namespace prod || kubectl create namespace prod"
+        //         sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest --namespace prod"
+        //     }
+        // }
     }
 
     post {
