@@ -55,7 +55,7 @@ pipeline {
         stage('Testing') {
             steps {
                 sh 'echo "Updating and Running Test Cases..."'
-                sh 'yarn test:update --passWithNoTests' 
+                sh 'yarn test:update' 
             }
         }
 
