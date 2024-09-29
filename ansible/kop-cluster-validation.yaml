@@ -1,4 +1,5 @@
 ---
+# this playbook will show you whether the kubernetes cluster is ready or not
 - name: Validate Kops cluster on remote host and display output
   hosts: KOPS
   tasks:
