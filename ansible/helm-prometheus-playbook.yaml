@@ -2,7 +2,6 @@
 # this playbook will copy 3 scripts to the kops instance then run them
 # helm.sh to download and install helm binaries
 # prometheus.sh to install prometheus usnig helm charts
-# javaForKopsAsSlave.sh to make the required directories and install dependencies that kops need to run as a slave for jenkins
 - name: Install Helm and prometheus on Kops Machine
   hosts: KOPS
   tasks:
@@ -14,10 +13,8 @@
       loop:
         - { src: '../bashScripts/helm.sh', dest: '/tmp/helm.sh' }
         - { src: '../bashScripts/prometheus.sh', dest: '/tmp/prometheus.sh' }
-        - { src: '../bashScripts/javaForKopsAsSlave.sh', dest: '/tmp/javaForKopsAsSlave.sh' }
     - name: Run multiple scripts on the remote host
       shell: "{{ item }}"
       loop:
         - /tmp/helm.sh
         - /tmp/prometheus.sh
-        - /tmp/javaForKopsAsSlave.sh
