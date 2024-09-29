@@ -1,6 +1,0 @@
-image:
-  repository: reactuilibrarytask/geist-ui
-  tag: latest
-
-service:
-  port: 3000
