@@ -69,13 +69,12 @@ pipeline {
                 }
             }
         }
-        // stage('Kubernetes Deploy') {
-        //     agent { label 'KOPS' }
-        //     steps {
-        //         sh "kubectl get namespace prod || kubectl create namespace prod"
-        //         sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest --namespace prod"
-        //     }
-        // }
+        stage('Kubernetes Deploy') {
+            agent { label 'KOPS' }
+            steps {
+                sh "helm upgrade --install --force geist-ui-stack helm/geistuicharts --set appimage=${DOCKER_IMAGE_NAME}:latest"
+            }
+        }
     }
 
     post {
