@@ -8,9 +8,9 @@
         dest: "{{ item.dest }}"
         mode: '0755'  # Make it executable if needed
       loop:
-        - { src: 'node18.6.0.sh', dest: '/tmp/node18.6.0.sh' }
-        - { src: 'jenkins.sh', dest: '/tmp/jenkins.sh' }
-        - { src: 'docker.sh', dest: '/tmp/docker.sh' }
+        - { src: '../bashScripts/node18.6.0.sh', dest: '/tmp/node18.6.0.sh' }
+        - { src: '../bashScripts/jenkins.sh', dest: '/tmp/jenkins.sh' }
+        - { src: '../bashScripts/docker.sh', dest: '/tmp/docker.sh' }
     - name: Run multiple scripts on the remote host
       shell: "{{ item }}"
       loop:
