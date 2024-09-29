@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: geist-ui
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: geist-ui
